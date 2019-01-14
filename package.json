@@ -1,0 +1,11 @@
+{
+  "name": "react-piano",
+  "version": "1.0.0",
+  "description": "A piano app written in react",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elcheshoro/react-piano.git"
+  },
+  "author": "Alexander Cheshire",
+  "license": "ISC"
+}
