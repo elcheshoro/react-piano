@@ -2,10 +2,20 @@
   "name": "react-piano",
   "version": "1.0.0",
   "description": "A piano app written in react",
+  "scripts": {
+    "lint": "eslint src/** --ext .js --ext .jsx"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/elcheshoro/react-piano.git"
   },
   "author": "Alexander Cheshire",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.12.3"
+  }
 }
