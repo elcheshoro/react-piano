@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const scripts = path.resolve(__dirname, 'src');
+const nodeModules = path.resolve(__dirname, 'node_modules');
 
 const webpackConfig = {
   entry: './src/index.jsx',
@@ -22,6 +23,11 @@ const webpackConfig = {
       {
         test: /\.(scss|css)$/,
         loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        include: [scripts, nodeModules],
+      },
+      {
+        test: /\.mp3/,
+        loaders: 'file-loader',
         include: [scripts],
       },
     ],

@@ -1,0 +1,14 @@
+.app {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .page-title {
+    font-size: 30px;
+    margin: 10px;
+  }
+
+  .piano-container {
+    width: 500px;
+  }
+}
