@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MidiNumbers, Piano as ReactPiano } from 'react-piano';
+import { KeyboardShortcuts, MidiNumbers, Piano as ReactPiano } from 'react-piano';
 
 import Note from '../../helpers/note';
 
@@ -33,11 +33,18 @@ export default class Piano extends Component {
       last: MidiNumbers.fromNote('a1'),
     };
 
+    const keyboardShortcuts = KeyboardShortcuts.create({
+      firstNote: noteRange.first,
+      lastNote: noteRange.last,
+      keyboardConfig: KeyboardShortcuts.HOME_ROW,
+    });
+
     return (
       <ReactPiano
         noteRange={noteRange}
         playNote={this.handlePlayNote}
         stopNote={this.handleStopNote}
+        keyboardShortcuts={keyboardShortcuts}
       />
     );
   }
