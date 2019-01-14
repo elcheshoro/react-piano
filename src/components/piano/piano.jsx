@@ -39,7 +39,6 @@ export default class Piano extends Component {
         noteRange={noteRange}
         playNote={this.handlePlayNote}
         stopNote={this.handleStopNote}
-        width={500}
       />
     );
   }
