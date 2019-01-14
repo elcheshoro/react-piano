@@ -18,10 +18,9 @@ export default class Piano extends Component {
   handlePlayNote(midiNote) {
     const currentNote = this.currentNotes[midiNote];
     if (currentNote) {
-      currentNote.pause();
+      currentNote.stop();
     }
     this.currentNotes[midiNote] = new Note(MIDI_NOTES[midiNote]);
-    this.currentNotes[midiNote].play();
   }
 
   handleStopNote(midiNote) {

@@ -1,7 +1,19 @@
 export default class Note {
   constructor(sound) {
     this.audio = new Audio(sound);
+    this.play();
+  }
+
+  play() {
     this.audio.play();
+    // This stops the abrupt ending of the note
+    this.timeout = setTimeout(() => {
+      this.fadeOut();
+    }, 2500);
+  }
+
+  stop() {
+    this.audio.pause();
   }
 
   fadeOut() {
