@@ -69,6 +69,10 @@
     },
     "testPathIgnorePatterns": [
       "/__tests__/setup.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.(js|jsx)"
     ]
   }
 }
