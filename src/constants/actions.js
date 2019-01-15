@@ -1,0 +1,3 @@
+export const NEW_SONG_FINISHED = 'NEW_SONG_FINISHED';
+export const DISCARD_NEW_SONG = 'DISCARD_NEW_SONG';
+export const SAVE_NEW_SONG = 'SAVE_NEW_SONG';

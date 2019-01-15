@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { KeyboardShortcuts, MidiNumbers, Piano as ReactPiano } from 'react-piano';
 
 import Note from '../../helpers/note';
 
 import MIDI_NOTES from './constants/midi-notes';
+import { KEY_UP, KEY_DOWN } from '../../constants/song-event-types';
 
 import 'react-piano/dist/styles.css';
 
-export default class Piano extends Component {
+class Piano extends Component {
   constructor() {
     super();
     this.currentNotes = {};
@@ -16,6 +18,11 @@ export default class Piano extends Component {
   }
 
   handlePlayNote(midiNote) {
+    const { onEvent } = this.props;
+    onEvent({
+      midiNote,
+      type: KEY_DOWN,
+    });
     const currentNote = this.currentNotes[midiNote];
     if (currentNote) {
       currentNote.stop();
@@ -24,6 +31,11 @@ export default class Piano extends Component {
   }
 
   handleStopNote(midiNote) {
+    const { onEvent } = this.props;
+    onEvent({
+      midiNote,
+      type: KEY_UP,
+    });
     this.currentNotes[midiNote].fadeOut();
   }
 
@@ -49,3 +61,9 @@ export default class Piano extends Component {
     );
   }
 }
+
+Piano.propTypes = {
+  onEvent: PropTypes.func.isRequired,
+};
+
+export default Piano;
