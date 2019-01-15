@@ -9,9 +9,24 @@
   }
 
   .piano-container {
+    height: 200px;
+  }
+
+  .piano-container,
+  .songs {
     max-width: 500px;
     width: 90%;
-    height: 200px;
+  }
+
+  .songs {
+    margin-top: 20px;
+    flex: 1;
+
+    .title {
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
   }
 
   .record-section {

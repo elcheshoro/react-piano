@@ -30,6 +30,10 @@ const webpackConfig = {
         loaders: 'file-loader',
         include: [scripts],
       },
+      {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
+      },
     ],
   },
   plugins: [

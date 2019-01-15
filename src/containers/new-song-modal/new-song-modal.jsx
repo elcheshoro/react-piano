@@ -71,6 +71,10 @@ class NewSongModal extends Component {
   }
 }
 
+NewSongModal.defaultProps = {
+  newSongEvents: null,
+};
+
 NewSongModal.propTypes = {
   discardNewSong: PropTypes.func.isRequired,
   saveNewSong: PropTypes.func.isRequired,
@@ -78,7 +82,7 @@ NewSongModal.propTypes = {
     type: PropTypes.string.isRequired,
     time: PropTypes.number.isRequired,
     midiNote: PropTypes.number,
-  })).isRequired,
+  })),
 };
 
 const mapStateToProps = state => ({

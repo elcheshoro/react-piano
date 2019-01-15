@@ -6,6 +6,7 @@ import Button from '../../components/button/button';
 import Piano from '../../components/piano/piano';
 import Timer from './components/timer';
 import NewSongModal from '../new-song-modal/new-song-modal';
+import SongList from '../song-list/song-list';
 
 import finishNewSongAction from '../../actions/finish-new-song';
 
@@ -74,12 +75,13 @@ class App extends Component {
 
   render() {
     const { isRecording, currentTime } = this.state;
+    const { songs, newSongEvents } = this.props;
 
     return (
       <div className="app">
         <div className="page-title">React Piano</div>
         <div className="piano-container">
-          <Piano onEvent={this.handlePianoEvent} />
+          <Piano onEvent={this.handlePianoEvent} disabled={newSongEvents !== null} />
         </div>
         <div className="record-section">
           <Button onClick={isRecording ? this.handleStopClick : this.handleRecordClick}>
@@ -87,18 +89,44 @@ class App extends Component {
           </Button>
           <Timer time={Math.floor(currentTime / 1000)} />
         </div>
+        <div className="songs">
+          <div className="title">My Songs</div>
+          <SongList songs={songs} />
+        </div>
         <NewSongModal />
       </div>
     );
   }
 }
 
-App.propTypes = {
-  finishNewSong: PropTypes.func.isRequired,
+App.defaultProps = {
+  newSongEvents: null,
 };
+
+App.propTypes = {
+  newSongEvents: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    time: PropTypes.number.isRequired,
+    midiNote: PropTypes.number,
+  })),
+  finishNewSong: PropTypes.func.isRequired,
+  songs: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    events: PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      time: PropTypes.number.isRequired,
+      midiNote: PropTypes.number,
+    })).isRequired,
+  })).isRequired,
+};
+
+const mpaStateToProps = state => ({
+  songs: state.songs.get('songs'),
+  newSongEvents: state.songs.get('newSongEvents'),
+});
 
 const mapDispatchToProps = ({
   finishNewSong: songEvents => finishNewSongAction(songEvents),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mpaStateToProps, mapDispatchToProps)(App);

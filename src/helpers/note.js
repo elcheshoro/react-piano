@@ -1,5 +1,8 @@
+import MIDI_NOTES from '../constants/midi-notes';
+
 export default class Note {
-  constructor(sound) {
+  constructor(midiNote) {
+    const sound = MIDI_NOTES[midiNote];
     this.audio = new Audio(sound);
     this.play();
   }

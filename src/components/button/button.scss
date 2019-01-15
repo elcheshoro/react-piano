@@ -6,6 +6,7 @@
   margin: 5px;
   font-size: 16px;
   cursor: pointer;
+  border-style: none;
 
   &:hover {
     background-color: darken($button-color, 10%);
@@ -16,7 +17,6 @@
   }
 
   &:active {
-    border-style: none;
     background-color: darken($button-color, 15%);
   }
 

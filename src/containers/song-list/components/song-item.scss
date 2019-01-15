@@ -1,0 +1,11 @@
+.song-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .song-name {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 20px;
+  }
+}

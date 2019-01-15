@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { KeyboardShortcuts, MidiNumbers, Piano as ReactPiano } from 'react-piano';
 
 import Note from '../../helpers/note';
-
-import MIDI_NOTES from './constants/midi-notes';
 import { KEY_UP, KEY_DOWN } from '../../constants/song-event-types';
 
 import 'react-piano/dist/styles.css';
@@ -27,7 +25,7 @@ class Piano extends Component {
     if (currentNote) {
       currentNote.stop();
     }
-    this.currentNotes[midiNote] = new Note(MIDI_NOTES[midiNote]);
+    this.currentNotes[midiNote] = new Note(midiNote);
   }
 
   handleStopNote(midiNote) {
@@ -40,16 +38,17 @@ class Piano extends Component {
   }
 
   render() {
+    const { disabled } = this.props;
     const noteRange = {
       first: MidiNumbers.fromNote('a0'),
       last: MidiNumbers.fromNote('a1'),
     };
 
-    const keyboardShortcuts = KeyboardShortcuts.create({
+    const keyboardShortcuts = disabled !== true ? KeyboardShortcuts.create({
       firstNote: noteRange.first,
       lastNote: noteRange.last,
       keyboardConfig: KeyboardShortcuts.HOME_ROW,
-    });
+    }) : null;
 
     return (
       <ReactPiano
@@ -62,8 +61,13 @@ class Piano extends Component {
   }
 }
 
+Piano.defaultProps = {
+  disabled: false,
+};
+
 Piano.propTypes = {
   onEvent: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default Piano;
