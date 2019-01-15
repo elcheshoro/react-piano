@@ -1,0 +1,22 @@
+.button {
+  $button-color: rgb(245, 146, 4);
+  background-color:$button-color;
+  color: white;
+  height: 30px;
+  margin: 5px;
+  font-size: 18px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($button-color, 10%);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    border-style: none;
+    background-color: darken($button-color, 15%);
+  }
+}
