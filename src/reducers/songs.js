@@ -5,9 +5,12 @@ import {
   SAVE_NEW_SONG,
 } from '../constants/actions';
 
+import getSongs from '../helpers/get-songs';
+import storeSongs from '../helpers/store-songs';
+
 const initialStateMap = Map({
   newSongEvents: null,
-  songs: [],
+  songs: getSongs(),
 });
 
 export default (state = initialStateMap, action) => {
@@ -18,13 +21,16 @@ export default (state = initialStateMap, action) => {
     case DISCARD_NEW_SONG:
       return state
         .set('newSongEvents', null);
-    case SAVE_NEW_SONG:
+    case SAVE_NEW_SONG: {
+      const updatedSongs = [{
+        events: state.get('newSongEvents'),
+        name: action.songName,
+      }].concat(state.get('songs'));
+      storeSongs(updatedSongs);
       return state
         .set('newSongEvents', null)
-        .set('songs', [{
-          events: state.get('newSongEvents'),
-          name: action.songName,
-        }].concat(state.get('songs')));
+        .set('songs', updatedSongs);
+    }
     default:
       return state;
   }
