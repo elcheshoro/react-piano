@@ -1,3 +1,5 @@
+@import '../../components/button/button.scss';
+
 .app {
   display: flex;
   align-items: center;
@@ -33,7 +35,18 @@
     margin-top: 20px;
   }
 
-  .record-button {
+  .button-text {
     width: 100px;
+  }
+
+  .stop-button,
+  .record-button {
+    display: inline-block;
+  }
+
+  .stop-button {
+    .button {
+      @include button(red);
+    }
   }
 }

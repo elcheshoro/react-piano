@@ -1,6 +1,5 @@
-.button {
-  $button-color: rgb(245, 146, 4);
-  background-color:$button-color;
+@mixin button($color) {
+  background-color:$color;
   color: white;
   height: 30px;
   margin: 5px;
@@ -9,7 +8,7 @@
   border-style: none;
 
   &:hover {
-    background-color: darken($button-color, 10%);
+    background-color: darken($color, 10%);
   }
 
   &:focus {
@@ -17,7 +16,7 @@
   }
 
   &:active {
-    background-color: darken($button-color, 15%);
+    background-color: darken($color, 15%);
   }
 
   &:disabled {
@@ -25,4 +24,8 @@
     color: black;
     cursor: not-allowed;
   }
+}
+
+.button {
+  @include button(rgb(245, 146, 4))
 }

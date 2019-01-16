@@ -73,8 +73,29 @@ class App extends Component {
     }
   }
 
+  renderRecordButton() {
+    const { isRecording } = this.state;
+    if (isRecording) {
+      return (
+        <div className="stop-button">
+          <Button onClick={this.handleStopClick}>
+            <div className="button-text">Stop</div>
+          </Button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="record-button">
+        <Button onClick={this.handleRecordClick}>
+          <div className="button-text">Record</div>
+        </Button>
+      </div>
+    );
+  }
+
   render() {
-    const { isRecording, currentTime } = this.state;
+    const { currentTime } = this.state;
     const { songs, newSongEvents } = this.props;
 
     return (
@@ -84,9 +105,7 @@ class App extends Component {
           <Piano onEvent={this.handlePianoEvent} disabled={newSongEvents !== null} />
         </div>
         <div className="record-section">
-          <Button onClick={isRecording ? this.handleStopClick : this.handleRecordClick}>
-            <div className="record-button">{isRecording ? 'Stop' : 'Record'}</div>
-          </Button>
+          {this.renderRecordButton()}
           <Timer time={Math.floor(currentTime / 1000)} />
         </div>
         <div className="songs">
