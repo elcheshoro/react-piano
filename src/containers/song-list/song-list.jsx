@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import SongItem from './components/song-item';
 
@@ -33,4 +34,8 @@ SongList.propTypes = {
   })).isRequired,
 };
 
-export default SongList;
+const mapStateToProps = state => ({
+  songs: state.songs.get('songs'),
+});
+
+export default connect(mapStateToProps)(SongList);

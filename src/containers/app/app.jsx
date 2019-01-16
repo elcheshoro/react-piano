@@ -96,7 +96,7 @@ class App extends Component {
 
   render() {
     const { currentTime } = this.state;
-    const { songs, newSongEvents } = this.props;
+    const { newSongEvents } = this.props;
 
     return (
       <div className="app">
@@ -110,7 +110,7 @@ class App extends Component {
         </div>
         <div className="songs">
           <div className="title">My Songs</div>
-          <SongList songs={songs} />
+          <SongList />
         </div>
         <NewSongModal />
       </div>
@@ -129,18 +129,9 @@ App.propTypes = {
     midiNote: PropTypes.number,
   })),
   finishNewSong: PropTypes.func.isRequired,
-  songs: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    events: PropTypes.arrayOf(PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      time: PropTypes.number.isRequired,
-      midiNote: PropTypes.number,
-    })).isRequired,
-  })).isRequired,
 };
 
 const mpaStateToProps = state => ({
-  songs: state.songs.get('songs'),
   newSongEvents: state.songs.get('newSongEvents'),
 });
 
