@@ -1,4 +1,5 @@
 import { Map } from 'immutable';
+import uuid from 'uuid/v4';
 
 import songs from '../../src/reducers/songs';
 import getSongs from '../../src/helpers/get-songs';
@@ -8,6 +9,7 @@ import { NEW_SONG_FINISHED, DISCARD_NEW_SONG, SAVE_NEW_SONG } from '../../src/co
 
 jest.mock('../../src/helpers/get-songs');
 jest.mock('../../src/helpers/store-songs');
+jest.mock('uuid/v4');
 
 beforeEach(() => {
   getSongs.mockReturnValue([]);
@@ -78,6 +80,7 @@ test('It unsets the new song for a discard new song action', () => {
 
 test('It adds the new song to the songs array for a new song save action', () => {
   expect.assertions(2);
+  uuid.mockReturnValue('123-123-123-123');
   const newSongEvents = [
     {
       type: SONG_STOP,
@@ -88,6 +91,7 @@ test('It adds the new song to the songs array for a new song save action', () =>
     newSongEvents,
     songs: [
       {
+        id: '321-321-321-321',
         name: 'my_first_song',
         events: [
           {
@@ -107,6 +111,7 @@ test('It adds the new song to the songs array for a new song save action', () =>
   expect(newState.get('newSongEvents')).toEqual(null);
   expect(newState.get('songs')).toEqual([
     {
+      id: '123-123-123-123',
       name: 'my_new_song',
       events: [
         {
@@ -116,6 +121,7 @@ test('It adds the new song to the songs array for a new song save action', () =>
       ],
     },
     {
+      id: '321-321-321-321',
       name: 'my_first_song',
       events: [
         {

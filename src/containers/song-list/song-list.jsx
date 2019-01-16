@@ -15,7 +15,7 @@ const SongList = ({ songs }) => {
     <div>
       {songs.map(song => (
         <SongItem
-          key={song.name}
+          key={song.id}
           {...song}
         />
       ))}
@@ -25,6 +25,7 @@ const SongList = ({ songs }) => {
 
 SongList.propTypes = {
   songs: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     events: PropTypes.arrayOf(PropTypes.shape({
       type: PropTypes.string.isRequired,

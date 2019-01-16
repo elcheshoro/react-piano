@@ -1,12 +1,14 @@
 import { Map } from 'immutable';
+import uuid from 'uuid/v4';
+
+import getSongs from '../helpers/get-songs';
+import storeSongs from '../helpers/store-songs';
+
 import {
   NEW_SONG_FINISHED,
   DISCARD_NEW_SONG,
   SAVE_NEW_SONG,
 } from '../constants/actions';
-
-import getSongs from '../helpers/get-songs';
-import storeSongs from '../helpers/store-songs';
 
 const initialStateMap = Map({
   newSongEvents: null,
@@ -23,6 +25,7 @@ export default (state = initialStateMap, action) => {
         .set('newSongEvents', null);
     case SAVE_NEW_SONG: {
       const updatedSongs = [{
+        id: uuid(),
         events: state.get('newSongEvents'),
         name: action.songName,
       }].concat(state.get('songs'));

@@ -23,6 +23,7 @@ test('It displays the list if there are songs', () => {
     <SongList
       songs={[
         {
+          id: '123-123-123-123',
           name: 'My song',
           events: [
             {
@@ -32,6 +33,7 @@ test('It displays the list if there are songs', () => {
           ],
         },
         {
+          id: '321-321-321-321',
           name: 'My longer song',
           events: [
             {
