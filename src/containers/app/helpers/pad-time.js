@@ -1,1 +1,1 @@
-export default value => `00${value}`.substr(-2);
+export default value => (value.toString().length >= 2 ? value.toString() : `00${value}`.substr(-2));

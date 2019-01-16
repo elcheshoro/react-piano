@@ -10,7 +10,7 @@ export default class Song {
   }
 
   play() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       this.interval = setInterval(() => {
         this.time += 10;
         for (let i = this.lastEvent; i < this.events.length; i += 1) {
@@ -35,7 +35,8 @@ export default class Song {
               resolve();
               break;
             default:
-              throw new Error('Invalid song event');
+              clearInterval(this.interval);
+              reject(new Error('Invalid song event'));
           }
         }
       }, 10);

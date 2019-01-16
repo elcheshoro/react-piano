@@ -4,7 +4,7 @@
   "description": "A piano app written in react",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "lint": "eslint src --ext .js --ext .jsx",
+    "lint": "eslint src __tests__ --ext .js --ext .jsx",
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "test": "jest"
   },
@@ -69,7 +69,8 @@
       "\\.(css|scss|mp3)$": "identity-obj-proxy"
     },
     "testPathIgnorePatterns": [
-      "/__tests__/setup.js"
+      "/__tests__/setup.js",
+      "/__tests__/mocks"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [

@@ -38,4 +38,6 @@ const mapStateToProps = state => ({
   songs: state.songs.get('songs'),
 });
 
+export { SongList };
+
 export default connect(mapStateToProps)(SongList);

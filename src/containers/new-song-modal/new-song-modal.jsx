@@ -30,10 +30,10 @@ class NewSongModal extends Component {
   handleSaveClick() {
     const { saveNewSong } = this.props;
     const { songName } = this.state;
-    saveNewSong(songName);
     this.setState({
       songName: '',
     });
+    saveNewSong(songName);
   }
 
   handleDiscardClick() {
@@ -93,5 +93,7 @@ const mapDispatchToProps = ({
   discardNewSong: discardNewSongAction,
   saveNewSong: song => saveNewSongAction(song),
 });
+
+export { NewSongModal };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewSongModal);

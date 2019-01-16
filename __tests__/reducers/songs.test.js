@@ -1,8 +1,17 @@
 import { Map } from 'immutable';
 
 import songs from '../../src/reducers/songs';
+import getSongs from '../../src/helpers/get-songs';
+
 import { SONG_STOP } from '../../src/constants/song-event-types';
 import { NEW_SONG_FINISHED, DISCARD_NEW_SONG, SAVE_NEW_SONG } from '../../src/constants/actions';
+
+jest.mock('../../src/helpers/get-songs');
+jest.mock('../../src/helpers/store-songs');
+
+beforeEach(() => {
+  getSongs.mockReturnValue([]);
+});
 
 test('It leaves the state unaltered for an unhandled action type', () => {
   expect.assertions(2);
