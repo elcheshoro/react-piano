@@ -1,4 +1,4 @@
-# react-piano
+# React Piano
 
 A piano recording app written in React.
 
