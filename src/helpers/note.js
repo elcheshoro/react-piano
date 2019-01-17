@@ -15,10 +15,6 @@ export default class Note {
     }, 2500);
   }
 
-  stop() {
-    this.audio.pause();
-  }
-
   fadeOut() {
     const reduceVolume = setInterval(() => {
       if (this.audio.volume >= 0.01) {

@@ -21,10 +21,6 @@ class Piano extends Component {
       midiNote,
       type: KEY_DOWN,
     });
-    const currentNote = this.currentNotes[midiNote];
-    if (currentNote) {
-      currentNote.stop();
-    }
     this.currentNotes[midiNote] = new Note(midiNote);
   }
 

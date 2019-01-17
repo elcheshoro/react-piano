@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Button from '../../components/button/button';
 import Piano from '../../components/piano/piano';
-import Timer from './components/timer';
 import NewSongModal from '../new-song-modal/new-song-modal';
 import SongList from '../song-list/song-list';
+import RecordSection from './components/record-section';
 
 import finishNewSongAction from '../../actions/finish-new-song';
 
@@ -73,29 +72,8 @@ class App extends Component {
     }
   }
 
-  renderRecordButton() {
-    const { isRecording } = this.state;
-    if (isRecording) {
-      return (
-        <div className="stop-button">
-          <Button onClick={this.handleStopClick}>
-            <div className="button-text">Stop</div>
-          </Button>
-        </div>
-      );
-    }
-
-    return (
-      <div className="record-button">
-        <Button onClick={this.handleRecordClick}>
-          <div className="button-text">Record</div>
-        </Button>
-      </div>
-    );
-  }
-
   render() {
-    const { currentTime } = this.state;
+    const { currentTime, isRecording } = this.state;
     const { newSongEvents } = this.props;
 
     return (
@@ -104,10 +82,12 @@ class App extends Component {
         <div className="piano-container">
           <Piano onEvent={this.handlePianoEvent} disabled={newSongEvents !== null} />
         </div>
-        <div className="record-section">
-          {this.renderRecordButton()}
-          <Timer time={Math.floor(currentTime / 1000)} />
-        </div>
+        <RecordSection
+          isRecording={isRecording}
+          currentTime={currentTime}
+          onRecordClick={this.handleRecordClick}
+          onStopClick={this.handleStopClick}
+        />
         <div className="songs">
           <div className="title">My Songs</div>
           <SongList />
