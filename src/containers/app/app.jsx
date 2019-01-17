@@ -7,9 +7,8 @@ import NewSongModal from '../new-song-modal/new-song-modal';
 import SongList from '../song-list/song-list';
 import RecordSection from './components/record-section';
 
+import Recording from './helpers/recording';
 import finishNewSongAction from '../../actions/finish-new-song';
-
-import { SONG_STOP } from '../../constants/song-event-types';
 
 import './app.scss';
 
@@ -18,62 +17,47 @@ class App extends Component {
     super();
     this.state = {
       isRecording: false,
-      currentTime: 0,
-      currentRecording: [],
+      recordingTime: 0,
     };
+    this.currentRecording = null;
     this.handleStopClick = this.handleStopClick.bind(this);
     this.handleRecordClick = this.handleRecordClick.bind(this);
-    this.incrementTime = this.incrementTime.bind(this);
     this.handlePianoEvent = this.handlePianoEvent.bind(this);
+    this.handleRecordingTimeChange = this.handleRecordingTimeChange.bind(this);
   }
 
-  incrementTime() {
-    const { currentTime } = this.state;
-    this.setState({ currentTime: currentTime + 10 });
+  handleRecordingTimeChange(recordingTime) {
+    this.setState({
+      recordingTime,
+    });
   }
 
   handleRecordClick() {
     this.setState({
       isRecording: true,
     });
-
-    this.timerInterval = setInterval(this.incrementTime, 10);
+    this.currentRecording = new Recording(this.handleRecordingTimeChange);
   }
 
   handleStopClick() {
-    const { currentRecording, currentTime } = this.state;
     const { finishNewSong } = this.props;
     this.setState({
       isRecording: false,
     });
-    if (this.timerInterval) {
-      clearInterval(this.timerInterval);
-      this.timerInterval = null;
-    }
-    finishNewSong([...currentRecording, {
-      type: SONG_STOP,
-      time: currentTime,
-    }]);
-    this.setState({
-      currentTime: 0,
-      currentRecording: [],
-    });
+    this.currentRecording.end();
+    finishNewSong(this.currentRecording.events);
+    this.currentRecording = null;
   }
 
   handlePianoEvent(event) {
-    const { currentRecording, currentTime, isRecording } = this.state;
+    const { isRecording } = this.state;
     if (isRecording) {
-      this.setState({
-        currentRecording: [...currentRecording, {
-          ...event,
-          time: currentTime,
-        }],
-      });
+      this.currentRecording.addEvent(event);
     }
   }
 
   render() {
-    const { currentTime, isRecording } = this.state;
+    const { isRecording, recordingTime } = this.state;
     const { newSongEvents } = this.props;
 
     return (
@@ -84,7 +68,7 @@ class App extends Component {
         </div>
         <RecordSection
           isRecording={isRecording}
-          currentTime={currentTime}
+          currentTime={recordingTime}
           onRecordClick={this.handleRecordClick}
           onStopClick={this.handleStopClick}
         />

@@ -33,7 +33,7 @@ class RecordSection extends Component {
     return (
       <div className="record-section">
         {this.renderRecordButton()}
-        <Timer time={Math.floor(currentTime / 1000)} />
+        <Timer time={Math.floor(currentTime)} />
       </div>
     );
   }
