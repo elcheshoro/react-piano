@@ -22,7 +22,7 @@ A piano recording app written in React.
 
 ## Possible future improvements
 
-* Covert project to TypeScript for better type safety.
+* Convert project to TypeScript for better type safety.
 
 * Create an API to store the songs rather than local storage.
 
