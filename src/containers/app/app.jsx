@@ -96,7 +96,7 @@ App.propTypes = {
   finishNewSong: PropTypes.func.isRequired,
 };
 
-const mpaStateToProps = state => ({
+const mapStateToProps = state => ({
   newSongEvents: state.songs.get('newSongEvents'),
 });
 
@@ -104,4 +104,6 @@ const mapDispatchToProps = ({
   finishNewSong: songEvents => finishNewSongAction(songEvents),
 });
 
-export default connect(mpaStateToProps, mapDispatchToProps)(App);
+export { App };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
