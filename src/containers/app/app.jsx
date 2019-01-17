@@ -43,6 +43,7 @@ class App extends Component {
     const { finishNewSong } = this.props;
     this.setState({
       isRecording: false,
+      recordingTime: 0,
     });
     this.currentRecording.end();
     finishNewSong(this.currentRecording.events);
